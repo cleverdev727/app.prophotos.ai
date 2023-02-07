@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upload</title>
+</head>
+<body>
+  <div class="w-full min-h-screen">
+    <div class="w-full h-16 bg-[#1E3356] flex items-center">
+      <img src="./assets/img/logo.svg" alt="Logo" class="h-10 ml-9">
+    </div>
+    <div class="w-full min-h-[calc(100vh-64px)] bg-[#F3F5F7] px-4 md:px-28 py-6" id="uploading">
+      <div class="pb-4 md:py-[107px] md:px-10">
+        <div class="flex flex-col items-center mb-4 font-bold font-sm">
+          <span class="text-red-600">Thank you for your purchase!</span>
+          <span class="text-blue-900">The quality of the <span class="text-red-600">photos you input</span> greatly effects the quality of the AI Generated photos.</span>
+        </div>
+        <div class="flex mb-24 font-bold text-xs text-blue-900">
+          <div class="w-1/3 flex flex-col justify-center items-center px-24">
+            <img src="./assets/img/pic.svg" alt="pic" class="h-[75px] mb-3">
+            <span class="text-center">Upload 10-25 Photos for best results.</span>
+          </div>
+          <div class="w-1/3 flex flex-col justify-center items-center px-20">
+            <img src="./assets/img/lamp.svg" alt="lamp" class="h-[106px]">
+            <span class="text-center">Use photos from different</span>
+            <span>days, backgrounds & lighting</span>
+          </div>
+          <div class="w-1/3 flex flex-col justify-center items-center px-24">
+            <img src="./assets/img/person.svg" alt="person" class="h-[106px]">
+            <span class="text-center">5 Close Up</span>
+            <span class="text-center">5 Medium Distance</span>
+            <span class="text-center">5 Full Body</span>
+          </div>
+        </div>
+        <div class="flex font-bold text-xs text-blue-900">
+          <div class="w-1/3 flex flex-col justify-center items-center px-24">
+            <img src="./assets/img/crop.svg" alt="crop" class="h-[89px]">
+            <span class="text-center">Crop-out other people & animals</span>
+          </div>
+          <div class="w-1/3 flex flex-col justify-center items-center px-24">
+            <img src="./assets/img/glasses.svg" alt="glasses" class="h-[89px]">
+            <span class="text-center">Don't use photos with Sunglasses.</span>
+          </div>
+          <div class="w-1/3 flex flex-col justify-center items-center px-24">
+            <img src="./assets/img/angle.svg" alt="angle" class="h-[78px]">
+            <span class="text-center">Get as many face angles & expressions as possible.</span>
+          </div>
+        </div>
+      </div>
+      <div class="w-full h-[250px] flex flex-col bg-white justify-center items-center mb-8" id="upload">
+        <img src="./assets/img/upload.svg" alt="upload" class="h-[65px] mb-3">
+        <span class="font-bold text-xs text-blue-900">Upload Images</span>
+      </div>
+      <div class="mb-8 flex justify-center">
+        <input type="checkbox" id="check" class="mr-2">
+        <label for="check" class="font-bold text-xs">I understand that if my input photos are low quality, my results may not be accurate.</label>
+      </div>
+      <form id="form" action="multiple-upload" method="POST" enctype="multipart/form-data" class="mb-4">
+        <input type="file" id="images" name="images" multiple class="hidden">
+        <div class="flex justify-center">
+          <button type="submit" class="bg-orange-600 w-[202px] h-14 rounded font-bold text-sm text-white">Upload</button>
+        </div>
+      </form>
+      <div class="flex justify-center mb-2">
+        <span class="font-bold text-xs text-gray-300">You can only upload 1 time per payment, please do so carefully.</span>
+      </div>
+      <div class="preview-images grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3"></div>
+    </div>
+    <div class="w-full min-h-[calc(100vh-64px)] bg-[#F3F5F7] hidden z-10 justify-center" id="loading">
+      <div class="w-[90%] md:w-[612px] h-40 md:h-[219px] bg-white flex flex-col justify-center items-center mt-14 rounded-[14px]">
+        <img src="./assets/img/loading.gif" alt="loading" class="h-14 mb-2">
+        <span class="font-bold text-sm"><span class="text-red-600">-90 minutes</span> remaining.</span>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+  <script src="/assets/js/upload.js"></script>
+</body>
+</html>
