@@ -1,13 +1,6 @@
 const multer = require("multer");
 const sharp = require("sharp");
-const path = require("path");
-const FormData = require('form-data');
-const fs = require('fs');
-const fetch = require("node-fetch");
-const { json } = require("express");
-
-const API_KEY = 'sd_qQGvqK48YTDmMT68knUsgrQSDPM7jD';
-const DOMAIN = 'https://api.astria.ai';
+const listModel = require('../models/list');
 
 const multerStorage = multer.memoryStorage();
 
@@ -71,37 +64,19 @@ const getResult = async (req, res) => {
     .map(image => "" + image + "")
     .join("");
 
-  // return res.send(`Images were uploaded:${images}`);
-  createTune(req, res);
-  // return res.sendFile(path.join(`${__dirname}/../views/loading.html`));
+  insertRecord(req, res);
 };
 
-const createTune = (req, res) => {
-  let formData = new FormData();
-  formData.append('tune[title]', 'My Tune');
-  formData.append('tune[branch]', 'fast');
-  formData.append('tune[token]', 'zwx');
-  formData.append('tune[name]', 'man');
-
-  req.body.images.forEach(image => {
-    formData.append('tune[images][]', fs.createReadStream(`upload/${image}`), image);
+const insertRecord = async (req, res) => {
+  const list = new listModel({
+    images: req.body.images
   });
-  formData.append('tune[callback]', 'https://optional-callback-url.com/to-your-service-when-ready');
+  try {
+    await list.save();
+    return res.redirect(`/loading/${list._id}`);
+  } catch (err) {
 
-  let options = {
-    method: 'POST',
-    headers: {
-      'Authorization': `Bearer ${API_KEY}`
-    },
-    body: formData
-  };
-  fetch(DOMAIN + '/tunes', options).then(r => {
-    return r.json();
-  }).then(jsonResponse => {
-    console.log(jsonResponse);
-    // return jsonResponse;
-    return res.redirect(`/gallery/${jsonResponse.id}`);
-  });
+  }
 }
 
 module.exports = {

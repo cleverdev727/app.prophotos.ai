@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const homeController = require("../controllers/home");
 const galleryController = require("../controllers/gallery");
+const loadingController = require("../controllers/loading");
 const uploadController = require("./../controllers/upload");
 
 let routes = app => {
@@ -14,6 +15,9 @@ let routes = app => {
     uploadController.getResult
   );
 
+  router.get('/loading/:id', loadingController.getRecord);
+  router.post('/loading/:id', loadingController.sendRequest);
+  
   router.get('/gallery/:id', galleryController.showTune);
 
   return app.use("/", router);

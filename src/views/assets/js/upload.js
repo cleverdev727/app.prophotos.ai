@@ -18,18 +18,8 @@ $(document).ready(function() {
         alert('You must select atleast 4 image');
       } else {
         // event.preventDefault();
-        $('#uploading').toggleClass('hidden');
-        $('#loading').toggleClass('hidden flex');
-        
-        // let formData = new FormData();
-        // const len = files.length;
-        // for (var i = 0; i < len; i ++) {
-        //   formData.append('images[]', files[i]);
-        // }
-        // fetch('multiple-upload', {
-        //   method: 'POST',
-        //   body: formData
-        // });
+        // $('#uploading').toggleClass('hidden');
+        // $('#loading').toggleClass('hidden flex');
       }
     }
   });
