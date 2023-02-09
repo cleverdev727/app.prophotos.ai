@@ -17,6 +17,8 @@ $(document).ready(function() {
         event.preventDefault();
         alert('You must select atleast 4 image');
       } else {
+        $('button').toggleClass('bg-[#65D299] bg-orange-600');
+        $('button').html('Uploading...');
         // event.preventDefault();
         // $('#uploading').toggleClass('hidden');
         // $('#loading').toggleClass('hidden flex');
