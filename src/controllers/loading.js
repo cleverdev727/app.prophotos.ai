@@ -87,17 +87,28 @@ const sendRequest = (req, res) => {
       ];
 
       for (let i = 0; i < 10; i ++) {
-        options.body = {
-          'prompt[text]': texts[i],
-          'prompt[num_images]': 8,
-          'prompt[negative_prompt]': 'extra leg',
-          'prompt[super_resolution]': true,
-          'prompt[face_correct]': true,
-          'prompt[callback]': 'http://app.prophotos.ai/created-prompt/' + req.params.id
-        }
+        let promptFormData = new FormData();
+        promptFormData.append('prompt[text]', texts[i]);
+        promptFormData.append('prompt[num_images]', 8);
+        // promptFormData.append('prompt[negative_prompt]', 'extra leg');
+        promptFormData.append('prompt[super_resolution]', 'true');
+        promptFormData.append('prompt[face_correct]', 'true');
+        promptFormData.append('prompt[callback]', 'http://app.prophotos.ai/created-prompt/' + req.params.id);
+        options.body = promptFormData;
+        // options.body = {
+        //   'prompt[text]': texts[i],
+        //   'prompt[num_images]': 8,
+        //   'prompt[negative_prompt]': 'extra leg',
+        //   'prompt[super_resolution]': true,
+        //   'prompt[face_correct]': true,
+        //   'prompt[callback]': 'http://app.prophotos.ai/created-prompt/' + req.params.id
+        // };
+        // console.log(options);
+        console.log(config.DOMAIN + '/tunes/' + jsonResponse.id + '/prompts');
         fetch(config.DOMAIN + '/tunes/' + jsonResponse.id + '/prompts', options).then(promptR => {
           return promptR.json();
         }).then(promptJson => {
+          console.log(promptJson);
           console.log(i);
           // createdPrompt(req);
         });
