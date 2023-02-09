@@ -20,6 +20,9 @@ let routes = app => {
   
   router.get('/gallery/:id', galleryController.showTune);
 
+  router.post('/created-tune/:id', loadingController.createdTune);
+  router.post('/created-prompt/:id', loadingController.createdPrompt);
+
   return app.use("/", router);
 };
 

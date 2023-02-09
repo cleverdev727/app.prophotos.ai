@@ -9,6 +9,14 @@ const ListSchema = new mongoose.Schema({
     },
     urls: {
       type: Array
+    },
+    status: {
+      type: Boolean,
+      default: false
+    },
+    prompt: {
+      type: Number,
+      default: 0
     }
 });
 

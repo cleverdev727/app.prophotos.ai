@@ -2,6 +2,9 @@ const express = require("express");
 const app = express();
 const initRoutes = require("./routes/web");
 const mongoose = require('mongoose');
+const http = require('http');
+const { Server } = require('socket.io');
+
 
 app.use(express.urlencoded({ extended: true }));
 
@@ -19,7 +22,22 @@ db.once('open', function() {
   console.log('db connected successfully');
 });
 
+const server = http.createServer(app);
+const io = new Server(server);
+
+app.set('io', io);
+
+io.sockets.on('connection', (socket) => {
+  console.log('a user connected');
+  socket.on('disconnect', () => {
+    console.log('user disconnected');
+  });
+  socket.on('test', (content) => {
+    console.log(content);
+  });
+});
+
 let port = 3000;
-app.listen(port, () => {
+server.listen(port, () => {
   console.log(`Running at localhost:${port}`);
 });

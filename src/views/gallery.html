@@ -25,9 +25,8 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
   <script>
-    const id = "<%= id %>";
-    const orig_images = "<%= orig_images %>";
-    const imgs = orig_images.split(',');
+    let data = "<%= data %>";
+    data = data.replaceAll(/&#34;/g, '"');
   </script>
   <script src="../assets/js/gallery.js"></script>
 </body>
