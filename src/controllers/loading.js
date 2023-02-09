@@ -42,6 +42,7 @@ const createdPrompt = async (req) => {
 }
 
 const sendRequest = (req, res) => {
+  return res.send('abcdef');
   console.log('trying to send');
   listModel.findOne({_id: req.params.id}, function(err, row) {
     let formData = new FormData();
