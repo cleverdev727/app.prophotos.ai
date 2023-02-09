@@ -46,7 +46,7 @@ const sendRequest = (req, res) => {
   listModel.findOne({_id: req.params.id}, function(err, row) {
     let formData = new FormData();
     formData.append('tune[title]', 'My Tune');
-    formData.append('tune[branch]', 'fast');
+    formData.append('tune[branch]', 'sd15');
     formData.append('tune[token]', 'sks');
     formData.append('tune[name]', 'person');
     
