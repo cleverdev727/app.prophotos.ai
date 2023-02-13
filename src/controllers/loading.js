@@ -91,8 +91,8 @@ const sendRequest = (req, res) => {
         promptFormData.append('prompt[text]', texts[i]);
         promptFormData.append('prompt[num_images]', 8);
         // promptFormData.append('prompt[negative_prompt]', 'extra leg');
-        promptFormData.append('prompt[super_resolution]', 'true');
-        promptFormData.append('prompt[face_correct]', 'true');
+        // promptFormData.append('prompt[super_resolution]', 'true');
+        // promptFormData.append('prompt[face_correct]', 'true');
         promptFormData.append('prompt[callback]', 'http://app.prophotos.ai/created-prompt/' + req.params.id);
         options.body = promptFormData;
         // options.body = {
