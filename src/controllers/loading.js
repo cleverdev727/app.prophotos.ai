@@ -36,7 +36,7 @@ const createdPrompt = async (req) => {
       }
     }
   );
-  if (row.prompt === 9) {
+  if (row.prompt === 10) {
     req.app.get('io').emit('created-all-prompt', row.request_id);
   }
 }
@@ -49,12 +49,12 @@ const sendRequest = (req, res) => {
     formData.append('tune[branch]', 'sd15');
     formData.append('tune[token]', 'sks');
     formData.append('tune[name]', 'person');
-    
+
     row.images.forEach(image => {
       formData.append('tune[images][]', fs.createReadStream(`upload/${image}`), image);
     });
     formData.append('tune[callback]', 'http://app.prophotos.ai/created-tune/' + req.params.id);
-    
+
     let options = {
       method: 'POST',
       headers: {
@@ -74,19 +74,20 @@ const sendRequest = (req, res) => {
       row.save();
 
       const texts = [
-        'A studio portrait of sks person wearing a peacoat, Wide Angle, intricate, elegant, HDR, UHD, 64k, highly detailed, studio lighting, professional, sharp focus, highest quality, trending on Pinterest, Photograph by Peter Kemp',
-        'A studio portrait of sks person wearing a peacoat, Wide Angle, intricate, elegant, HDR, UHD, 64k, highly detailed, studio lighting, professional, sharp focus, highest quality',
+        'Professional Portrait Eye-Level Photo From Below of sks person, Shot on Afga Vista 400, Natural Lighting',
+        'Professional Portrait Eye-Level Photo From Below of sks person, Shot on Afga Vista 400, Natural Lighting, snowing',
+        'Professional Portrait Eye-Level Photo From Below of sks person wearing a peacoat, Shot on Afga Vista 400, Natural Lighting',
+        'Professional Headshot Eye-Level Photo From Below of sks person wearing a peacoat, Shot on Afga Vista 400, Natural Lighting, in Central Park',
+        'Professional Headshot Eye-Level Photo From Below of sks person, Shot on Afga Vista 400, Natural Lighting, in Central Park',
+        'Professional Portrait Eye-Level Headshot From Below of sks person, Shot on Afga Vista 400, studio lighting, in a photo studio',
+        'Professional Portrait Eye-Level Photo From Below of sks person wearing a peacoat, Shot on Afga Vista 400, studio lighting, in a photo studio',
         'A studio portrait of sks person wearing a peacoat, Wide Angle, intricate, elegant, HDR, UHD, 64k, highly detailed, studio lighting, professional, sharp focus, highest quality, trending on Pinterest, bokeh, outdoors, Photograph by Ruth Bernhard',
-        'A studio portrait of sks person wearing a Tom Ford suit and tie, headshot, intricate, elegant, HDR, UHD, 64k, highly detailed, studio lighting, professional, sharp focus, highest quality, trending on Pinterest',
-        'A studio portrait of sks person wearing a peacoat, Wide Angle, intricate, elegant, HDR, UHD, 64k, highly detailed, studio lighting, professional, sharp focus, highest quality, trending on Pinterest, bokeh, Photograph by Ruth Bernhard',
         'A studio portrait of sks person wearing a blazer, headshot, intricate, elegant, HDR, UHD, 64k, highly detailed, studio lighting, professional, sharp focus, highest quality, trending on pinterest, Photograph by Ansel Adams',
-        'A studio portrait of sks person wearing Aime Leon Dore, headshot, intricate, elegant, HDR, UHD, 64k, highly detailed, studio lighting, professional, sharp focus, highest quality, trending on pinterest, Photograph by Ansel Adams',
-        'A studio portrait of sks person wearing a blazer, headshot, intricate, elegant, HDR, UHD, 64k, highly detailed, studio lighting, professional, sharp focus, highest quality, trending on pinterest, Photograph by Ansel Adams',
-        'sks person portrait wearing suit and tie, symmetrical face, headshot,intricate,elegant,highly detailed,8k, sharp focus, studio lighting, photo realistic style, color, successful, professional, corporate, from investor prospectus',
+        'A studio portrait of sks person wearing a peacoat, Wide Angle, intricate, elegant, HDR, UHD, 64k, highly detailed, studio lighting, professional, sharp focus, highest quality',
         'sks person portrait, symmetrical face, headshot,intricate,elegant,highly detailed,8k, sharp focus, studio lighting, photo realistic style, full color, successful, professional'
       ];
 
-      for (let i = 0; i < 10; i ++) {
+      for (let i = 0; i < 11; i ++) {
         let promptFormData = new FormData();
         promptFormData.append('prompt[text]', texts[i]);
         promptFormData.append('prompt[num_images]', 8);
